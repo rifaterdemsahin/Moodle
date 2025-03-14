@@ -70,4 +70,4 @@ echo "- Use emojis" >> 2.8.1_rubberduck.md
 
 echo " time to move the files to the folders "
 # Move the files into the directory
-mv 2.1.1_setup.md 2.2.1_commands.md 2.3.1_journey.drawio 2.4.1_todos.md 2.5.1_debugging.md 2.6.1_prompts.md 2.7.1_files.md 2.8.1_rubberduck.md 2_Journey/
+mv 2.1.1_setup.md 2.2.1_commands.md 2.3.1_journey.drawio 2.4.1_todos.md 2.5.1_debugging.md 2.6.1_prompts.md 2.7.1_files.md 2.8.1_rubberduck.md 2_✈️_Journey/
