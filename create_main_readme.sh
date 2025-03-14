@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# chmod +x /workspaces/Moodle/create_main_readme.sh; /workspaces/Moodle/create_main_readme.sh
 # Colors for better formatting
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
