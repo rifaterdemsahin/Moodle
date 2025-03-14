@@ -14,22 +14,16 @@ echo -e "\n${YELLOW}## Documentation for the Folder Structure${NC}"
 # Create a formatted table for the folder structure
 echo -e "| Section         | Description                                                                                                      | Action                |"
 echo -e "|-----------------|------------------------------------------------------------------------------------------------------------------|-----------------------|"
-echo -e "| **🌍 Real**         | *The Job That Starts with Objective and Key Results* - Sets goals and objectives, aligning tasks with measurable results. | Aim > Goals   |"
-echo -e "| **🌳 Environments** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |"
-echo -e "| **🌌 Imaginary**    | *What You Learn on the Road* - Tracks concepts, theories, and skills acquired, promoting continuous growth.            | Capture > Screenshots |"
-echo -e "| **📐 Formulas**     | *The Guides That Are Mentioned* - Essential guides and formulas for understanding and solving project challenges.     |  GPT > Learn from it |"
-echo -e "| **🔣 Symbols**      | *Code That Is Implemented* - Includes code snippets and examples to demonstrate each concept practically.              |  Execute > Code   |"
-echo -e "| **🌀 Semblance**    | *Errors Found in the Process* - Documents mistakes and solutions, making errors valuable learning opportunities.       |  Fix > Errors   |"
-
-echo -e "\n${YELLOW}Practical Terminal Commands From Your Workstation${NC}"
-echo -e "```bash"
-echo -e "git pull; git add . ; git commit -m \"Codespaces\" -m \"updates\"; git push;sleep 3;clear"
-echo -e "```"
+echo -e "| **1_🌍 Real**         | *The Job That Starts with Objective and Key Results* - Sets goals and objectives, aligning tasks with measurable results. | Aim > Goals   |"
+echo -e "| **2_🌳 Journey** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |"
+echo -e "| **3_🌳 Environments** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |"
+echo -e "| **4_🌌 Imaginary**    | *What You Learn on the Road* - Tracks concepts, theories, and skills acquired, promoting continuous growth.            | Capture > Screenshots |"
+echo -e "| **5_📐 Formulas**     | *The Guides That Are Mentioned* - Essential guides and formulas for understanding and solving project challenges.     |  GPT > Learn from it |"
+echo -e "| **6_🔣 Symbols**      | *Code That Is Implemented* - Includes code snippets and examples to demonstrate each concept practically.              |  Execute > Code   |"
+echo -e "| **7_🌀 Semblance**    | *Errors Found in the Process* - Documents mistakes and solutions, making errors valuable learning opportunities.       |  Fix > Errors   |"
 
 echo -e "\n${YELLOW}Collaborators>${NC}"
-echo -e "- Cheuk > https://www.linkedin.com/in/ch-c-797533177/"
-echo -e "- Nawal > https://www.linkedin.com/in/nawalc/"
-echo -e "- Tomi > https://www.linkedin.com/in/oluwatomi-amao-245b61189/"
+
 
 echo -e "\n${YELLOW}prompts:${NC}"
 echo -e "# 🎯 Objectives"
@@ -72,6 +66,6 @@ echo -e "\n${YELLOW}PromptFixer:${NC}"
 echo -e "-act as a prompt engineer,review the prompt and ask your questions,write a better version of the prompt"
 
 # Create directories for the structure if they don't exist
-mkdir -p "🌍_Real" "🌳_Environments" "🌌_Imaginary" "📐_Formulas" "🔣_Symbols" "🌀_Semblance"
+mkdir -p "1_🌍_Real" "3_🌳_Environments" "4_🌌_Imaginary" "5_📐_Formulas" "6_🔣_Symbols" "7_🌀_Semblance"
 
 echo -e "\n${GREEN}Directories created successfully!${NC}"
