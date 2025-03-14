@@ -21,7 +21,7 @@ cat > README.md << 'EOF'
 | Section         | Description                                                                                                      | Action                |
 |-----------------|------------------------------------------------------------------------------------------------------------------|-----------------------|
 | **1_🌍 Real**         | *The Job That Starts with Objective and Key Results* - Sets goals and objectives, aligning tasks with measurable results. | Aim > Goals   |
-| **2_🌳 Journey** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |
+| **2_✈️ Journey** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |
 | **3_🌳 Environments** | *The Roadmap and Use Cases* - A roadmap with learning modules and real-world use cases to apply new skills.            | Create > Runtimes |
 | **4_🌌 Imaginary**    | *What You Learn on the Road* - Tracks concepts, theories, and skills acquired, promoting continuous growth.            | Capture > Screenshots |
 | **5_📐 Formulas**     | *The Guides That Are Mentioned* - Essential guides and formulas for understanding and solving project challenges.     |  GPT > Learn from it |
