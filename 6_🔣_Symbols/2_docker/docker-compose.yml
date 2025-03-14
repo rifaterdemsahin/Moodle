@@ -12,7 +12,7 @@ services:
     restart: always
 
   moodle:
-    image: moodlehq/moodle-php-apache:latest
+    image: moodlehq/moodle-php-apache:8.0
     container_name: moodle_app
     ports:
       - "8080:80"
