@@ -22,7 +22,7 @@ services:
       MOODLE_DB_NAME: moodle
       MOODLE_DB_USER: moodle
       MOODLE_DB_PASSWORD: moodle
-      MOODLE_WWWROOT: http://localhost:8080
+      MOODLE_WWWROOT: https://shiny-capybara-55rwj7pgqxh766.github.dev
       MOODLE_ADMIN_USER: admin
       MOODLE_ADMIN_PASSWORD: admin123
       MOODLE_FULLNAME: "Moodle LMS"
