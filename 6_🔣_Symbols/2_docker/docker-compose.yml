@@ -14,41 +14,31 @@ services:
     networks:
       - moodle_network
     restart: always
-    # Add healthcheck to ensure database is ready
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
 
   moodle:
-    image: bitnami/moodle:latest
+    image: bitnami/moodle:4.3.3  # Pin a specific version
     container_name: moodle_app
     ports:
-      - "8080:80"  # This is correct - maps host 8080 to container 80
+      - "8080:80"
     environment:
-      # Database configuration
       MOODLE_DATABASE_TYPE: mysqli
       MOODLE_DATABASE_HOST: db
       MOODLE_DATABASE_PORT_NUMBER: 3306
       MOODLE_DATABASE_NAME: moodle
       MOODLE_DATABASE_USER: moodle
       MOODLE_DATABASE_PASSWORD: moodle
-      
-      # Moodle configuration
       MOODLE_USERNAME: admin
       MOODLE_PASSWORD: admin123
       MOODLE_EMAIL: admin@example.com
       MOODLE_SITE_NAME: Moodle LMS
-      
-      # Required for GitHub Codespaces/Cloud IDE environments
       ALLOW_EMPTY_PASSWORD: "yes"
       MOODLE_SKIP_BOOTSTRAP: "no"
-      MOODLE_HOST: localhost  # Removed :8080 since it runs on port 80 inside container
-      
-      # Install timeout increase
-      MOODLE_INSTALL_TIMEOUT: 1200
-      
-      # PHP configuration
+      MOODLE_HOST: localhost
+      MOODLE_INSTALL_TIMEOUT: 1800  # Increased timeout
       PHP_MAX_EXECUTION_TIME: 600
       PHP_MEMORY_LIMIT: 512M
       PHP_POST_MAX_SIZE: 100M
@@ -57,7 +47,6 @@ services:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
     depends_on:
-      # Updated to use condition based on healthcheck
       db:
         condition: service_healthy
     networks:
