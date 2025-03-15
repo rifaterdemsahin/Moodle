@@ -1,5 +1,6 @@
 # Self Learning Project Template
 ## Goal : Fill the skills gaps by self learning while leveraging technology
+## Goal : Setup Moodle
 
 ## Documentation for the Folder Structure
 
