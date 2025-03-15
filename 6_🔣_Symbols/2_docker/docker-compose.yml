@@ -20,7 +20,7 @@ services:
       retries: 10
 
   moodle:
-    image: bitnami/moodle:4.2.2
+    image: bitnami/moodle:latest
     container_name: moodle_app
     ports:
       - "8080:80"
