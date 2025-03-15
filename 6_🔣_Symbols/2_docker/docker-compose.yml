@@ -47,6 +47,7 @@ services:
     volumes:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
+      - ./apache_conf:/bitnami/apache/conf
     depends_on:
       db:
         condition: service_healthy
