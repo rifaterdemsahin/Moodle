@@ -30,8 +30,7 @@ services:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     deploy:  # Optional resource limits for production
       resources:
         limits:
