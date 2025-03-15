@@ -6,7 +6,7 @@ docker build -t my-moodle:latest .
 cd /workspaces/Moodle/6_🔣_Symbols/2_docker
 
 # after config changes run it
-docker-compose up -d 
+docker-compose up --force-recreate
 docker-compose down -v
 
 
