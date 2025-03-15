@@ -4,40 +4,45 @@ services:
   moodle:
     image: my-moodle:latest
     container_name: moodle_app
-    restart: always  # Automatic restarts for uptime
+    restart: always
     ports:
-      - "80:80"  # Standard HTTP port (or 443 with SSL)
+      - "80:80"
     environment:
       MOODLE_DATABASE_TYPE: mysqli
       MOODLE_DATABASE_HOST: moodle_db
       MOODLE_DATABASE_PORT_NUMBER: 3306
       MOODLE_DATABASE_NAME: moodle
       MOODLE_DATABASE_USER: moodle
-      MOODLE_DATABASE_PASSWORD: "StrongP@ssw0rd123"  # Secure password
+      MOODLE_DATABASE_PASSWORD: "SafeP@ssw0rd-123"
       MOODLE_USERNAME: admin
-      MOODLE_PASSWORD: "SecureAdminP@ssw0rd456"  # Strong admin password
+      MOODLE_PASSWORD: "SecureAdminP@ssw0rd456"
       MOODLE_EMAIL: contact@rifaterdemsahin.com
       MOODLE_SITE_NAME: "Moodle LMS"
-      MOODLE_SKIP_BOOTSTRAP: "no"  # Install once, then set to "yes"
-      MOODLE_HOST: "rifaterdemsahin.com"  # Replace with actual domain
+      MOODLE_SKIP_BOOTSTRAP: "no"
+      MOODLE_HOST: "rifaterdemsahin.com"
       MOODLE_INSTALL_TIMEOUT: 1800
-      MOODLE_DEBUG: "no"  # Disable debugging in prod
-      PHP_MAX_EXECUTION_TIME: 300  # Lower for efficiency
-      PHP_MEMORY_LIMIT: 256M  # Adjust based on needs
+      MOODLE_DEBUG: "no"
+      PHP_MAX_EXECUTION_TIME: 300
+      PHP_MEMORY_LIMIT: 256M
       PHP_POST_MAX_SIZE: 50M
       PHP_UPLOAD_MAX_FILESIZE: 50M
-      PHP_LOG_ERRORS: "1"  # Log errors, but don’t display
-      PHP_DISPLAY_ERRORS: "0"  # Hide errors from users
+      PHP_LOG_ERRORS: "1"
+      PHP_DISPLAY_ERRORS: "0"
+      MOODLE_DATABASE_RETRIES: 12
+      MOODLE_DATABASE_INITIAL_WAIT: 5
     volumes:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
     depends_on:
-      - db
-    deploy:  # Optional resource limits for production
+      db:
+        condition: service_healthy
+    deploy:
       resources:
         limits:
           cpus: "1.0"
           memory: 1G
+    networks:
+      - moodle-net
 
   db:
     image: mariadb:10.6
@@ -45,17 +50,23 @@ services:
     environment:
       MYSQL_DATABASE: moodle
       MYSQL_USER: moodle
-      MYSQL_PASSWORD: "StrongP@ssw0rd123"  # Match Moodle’s password
-      MYSQL_ROOT_PASSWORD: "RootP@ssw0rd789"  # Secure root password
+      MYSQL_PASSWORD: "SafeP@ssw0rd-123"
+      MYSQL_ROOT_PASSWORD: "RootP@ssw0rd789"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysql", "-h", "localhost", "-umoodle", "-pStrongP@ssw0rd123", "-e", "SHOW DATABASES;"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
       interval: 10s
       timeout: 5s
       retries: 10
+    networks:
+      - moodle-net
 
 volumes:
   moodle_data:
   moodledata_data:
   db_data:
+
+networks:
+  moodle-net:
+    driver: bridge
