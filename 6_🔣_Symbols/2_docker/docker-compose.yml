@@ -19,7 +19,7 @@ services:
     image: bitnami/moodle:latest
     container_name: moodle_app
     ports:
-      - "8080:8080"
+      - "8080:80"  # Changed from 8080:8080 to 8080:80
     environment:
       # Database configuration
       - MOODLE_DATABASE_TYPE=mysqli
@@ -34,21 +34,20 @@ services:
       - MOODLE_PASSWORD=admin123
       - MOODLE_EMAIL=admin@example.com
       - MOODLE_SITE_NAME=Moodle LMS
-      - MOODLE_SKIP_BOOTSTRAP=no
-      - MOODLE_SKIP_INSTALL=no
       
-      # PHP configuration (optional)
-      - PHP_MAX_EXECUTION_TIME=300
+      # Required for GitHub Codespaces/Cloud IDE environments
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MOODLE_SKIP_BOOTSTRAP=no
+      - MOODLE_HOST=localhost:8080
+      
+      # Install timeout increase
+      - MOODLE_INSTALL_TIMEOUT=1200
+      
+      # PHP configuration
+      - PHP_MAX_EXECUTION_TIME=600
       - PHP_MEMORY_LIMIT=512M
       - PHP_POST_MAX_SIZE=100M
       - PHP_UPLOAD_MAX_FILESIZE=100M
-      
-      # SMTP configuration (optional - for sending emails)
-      # - MOODLE_SMTP_HOST=smtp.example.com
-      # - MOODLE_SMTP_PORT=587
-      # - MOODLE_SMTP_USER=user
-      # - MOODLE_SMTP_PASSWORD=password
-      # - MOODLE_SMTP_PROTOCOL=tls
     volumes:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
@@ -57,12 +56,6 @@ services:
     networks:
       - moodle_network
     restart: always
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/login/index.php"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
 
 networks:
   moodle_network:
