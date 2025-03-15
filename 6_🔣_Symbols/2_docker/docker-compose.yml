@@ -1,10 +1,8 @@
-version: '3'
-
 services:
   moodle:
-    image: my-moodle:latest  # Custom image to fix Apache conf issue
+    image: my-moodle:latest
     container_name: moodle_app
-    restart: no  # Set to "always" in production after confirming it works
+    restart: no  # Change to "always" after success
     ports:
       - "8080:80"
     environment:
@@ -18,7 +16,7 @@ services:
       MOODLE_PASSWORD: admin123
       MOODLE_EMAIL: admin@example.com
       MOODLE_SITE_NAME: "Moodle LMS"
-      ALLOW_EMPTY_PASSWORD: "yes"  # For dev only; remove in production
+      ALLOW_EMPTY_PASSWORD: "yes"
       MOODLE_SKIP_BOOTSTRAP: "no"
       MOODLE_HOST: localhost
       MOODLE_INSTALL_TIMEOUT: 1800
@@ -27,14 +25,16 @@ services:
       PHP_MEMORY_LIMIT: 512M
       PHP_POST_MAX_SIZE: 100M
       PHP_UPLOAD_MAX_FILESIZE: 100M
-      PHP_LOG_ERRORS: "1"  # Enable PHP error logging
-      PHP_DISPLAY_ERRORS: "1"  # Show errors in output
+      PHP_LOG_ERRORS: "1"
+      PHP_DISPLAY_ERRORS: "1"
     volumes:
       - moodle_data:/bitnami/moodle
       - moodledata_data:/bitnami/moodledata
+      - ./php-logs:/opt/bitnami/php/logs
     depends_on:
       db:
-        condition: service_healthy  # Wait for DB to be ready
+        condition: service_healthy
+    command: bash -c "sleep 15 && /opt/bitnami/scripts/moodle/entrypoint.sh /opt/bitnami/scripts/moodle/run.sh"
 
   db:
     image: mysql:5.7
@@ -47,10 +47,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysql", "-h", "localhost", "-umoodle", "-pmoodle", "-e", "SHOW DATABASES;"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
 volumes:
   moodle_data:
