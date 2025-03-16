@@ -1,0 +1,61 @@
+services:
+  moodle:
+    image: my-moodle:latest
+    container_name: moodle_app
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      MOODLE_DATABASE_TYPE: mysqli
+      MOODLE_DATABASE_HOST: moodle_db
+      MOODLE_DATABASE_PORT_NUMBER: 3306
+      MOODLE_DATABASE_NAME: moodle
+      MOODLE_DATABASE_USER: moodle
+      MOODLE_DATABASE_PASSWORD: "SafeP@ssw0rd-123"
+      MOODLE_USERNAME: admin
+      MOODLE_PASSWORD: "SecureAdminP@ssw0rd456"
+      MOODLE_EMAIL: contact@rifaterdemsahin.com
+      MOODLE_SITE_NAME: "Moodle LMS"
+      MOODLE_HOST: "rifaterdemsahin.com"
+      PHP_MAX_EXECUTION_TIME: 300
+      PHP_MEMORY_LIMIT: 256M
+      PHP_POST_MAX_SIZE: 50M
+      PHP_UPLOAD_MAX_FILESIZE: 50M
+      MOODLE_DATABASE_WAIT_TIMEOUT: 300
+      MOODLE_SKIP_BOOTSTRAP: "no"
+    volumes:
+      - moodle_data:/bitnami/moodle
+      - moodledata_data:/bitnami/moodledata
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - moodle-net
+
+  db:
+    image: mariadb:10.6
+    container_name: moodle_db
+    environment:
+      MYSQL_DATABASE: moodle
+      MYSQL_USER: moodle
+      MYSQL_PASSWORD: "SafeP@ssw0rd-123"
+      MYSQL_ROOT_PASSWORD: "RootP@ssw0rd789"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u$MYSQL_USER", "-p$MYSQL_PASSWORD"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - moodle-net
+
+volumes:
+  moodle_data:
+  moodledata_data:
+  db_data:
+
+networks:
+  moodle-net:
+    driver: bridge
