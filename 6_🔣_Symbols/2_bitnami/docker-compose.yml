@@ -8,7 +8,7 @@ services:
     environment:
       MOODLE_DATABASE_TYPE: mariadb
       MOODLE_DATABASE_HOST: db
-      MOODLE_DATABASEa_PORT_NUMBER: 3306
+      MOODLE_DATABASE_PORT_NUMBER: 3306  # Fixed typo here
       MOODLE_DATABASE_NAME: moodle
       MOODLE_DATABASE_USER: moodle
       MOODLE_DATABASE_PASSWORD: "SafeP@ssw0rd-123"
@@ -30,7 +30,7 @@ services:
     networks:
       - moodle-net
     command: >
-      bash -c "if [ ! -f /bitnami/moodle/config.php ]; then /opt/bitnami/scripts/moodle/entrypoint.sh /opt/bitnami/scripts/moodle/run.sh; else php /bitnami/moodle/admin/cli/install_database.php && /opt/bitnami/scripts/moodle/run.sh; fi"
+          bash -c "if [ ! -f /bitnami/moodle/config.php ]; then /opt/bitnami/scripts/moodle/entrypoint.sh /opt/bitnami/scripts/moodle/run.sh; else php /bitnami/moodle/admin/cli/install_database.php && /opt/bitnami/scripts/moodle/run.sh; fi"
 
   db:
     image: mariadb:10.6
