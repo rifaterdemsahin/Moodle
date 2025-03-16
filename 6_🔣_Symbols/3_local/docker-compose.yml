@@ -8,7 +8,7 @@ services:
     environment:
       MOODLE_DATABASE_TYPE: mariadb
       MOODLE_DATABASE_HOST: db
-      MOODLE_DATABASE_PORT_NUMBER: 3306
+      MOODLE_DATABASEa_PORT_NUMBER: 3306
       MOODLE_DATABASE_NAME: moodle
       MOODLE_DATABASE_USER: moodle
       MOODLE_DATABASE_PASSWORD: "SafeP@ssw0rd-123"
