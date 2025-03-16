@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   moodle:
     image: my-moodle:latest
@@ -8,7 +6,7 @@ services:
     ports:
       - "80:80"
     environment:
-      MOODLE_DATABASE_TYPE: mysqli
+      MOODLE_DATABASE_TYPE: mariadb
       MOODLE_DATABASE_HOST: db
       MOODLE_DATABASE_PORT_NUMBER: 3306
       MOODLE_DATABASE_NAME: moodle
@@ -31,6 +29,8 @@ services:
       - db
     networks:
       - moodle-net
+    command: >
+      bash -c "if [ ! -f /bitnami/moodle/config.php ]; then /opt/bitnami/scripts/moodle/entrypoint.sh /opt/bitnami/scripts/moodle/run.sh; else php /bitnami/moodle/admin/cli/install_database.php && /opt/bitnami/scripts/moodle/run.sh; fi"
 
   db:
     image: mariadb:10.6
