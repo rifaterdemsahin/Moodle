@@ -4,7 +4,7 @@ services:
     container_name: moodle_app
     restart: always
     ports:
-      - "80:80"
+      - "8080:80"
     environment:
       MOODLE_DATABASE_TYPE: mariadb
       MOODLE_DATABASE_HOST: db
