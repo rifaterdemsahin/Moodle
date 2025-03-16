@@ -1,9 +1,11 @@
+cd /Users/rifaterdemsahin/projects/Moodle/6_🔣_Symbols/3_local/
+
 # build
 docker build -t my-moodle:latest .
 
 
 # run
-cd /workspaces/Moodle/6_🔣_Symbols/2_docker
+cd /Users/rifaterdemsahin/projects/Moodle/6_🔣_Symbols/3_local/
 
 # after config changes run it
 docker-compose up --force-recreate
