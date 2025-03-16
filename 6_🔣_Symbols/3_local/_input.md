@@ -15,6 +15,7 @@ docker-compose down -v
 curl https://shiny-capybara-55rwj7pggxh7r66-8080.app.github.dev/
 
 # debug 
+docker inspect moodle_app
 docker-compose logs -f
 docker logs moodle_app
 docker exec -it moodle_app cat /opt/bitnami/apache/logs/error_log
